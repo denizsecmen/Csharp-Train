@@ -32,6 +32,8 @@
 						<td>@obj.Id</td>
 						<td>@obj.Name</td>
 						<td>@obj.DisplayOrder</td>
+						<td><a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-primary">Edit</a></td>
+				        <td><a asp-controller="Category" asp-route-id="@obj.Id" asp-action="Edit" class="btn btn-outline-secondary">Delete</a></td>
 					</tr>
 				}
 			</tbody>

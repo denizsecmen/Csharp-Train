@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Train_000.Data;
 using Train_000.Models;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
 
 namespace Train_000.Controllers
@@ -43,6 +40,31 @@ namespace Train_000.Controllers
 		public IActionResult Create()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Category.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			Category? categoryFromDb = _db.Category.Find(id);
+			if (categoryFromDb == null)
+			{
+				return NotFound();
+			}
+			return View(categoryFromDb);
         }
     }
 }
